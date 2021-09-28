@@ -10,6 +10,9 @@ import {
 } from "three";
 import {resizeRenderer} from "./resizeRenderer";
 import "./styles/style.scss";
+import elena1 from "./images/elena1.png";
+import elena2 from "./images/elena2.png";
+import elena3 from "./images/elena3.png";
 
 const main = () => {
 	const canvas = document.querySelector<HTMLCanvasElement>("#canvas");
@@ -27,7 +30,7 @@ const main = () => {
 	const scene = new Scene();
 
 	const addCube = (x: number, image: string) => {
-		const boxSize = Math.random() * 1.2;
+		const boxSize = Math.random() * (1 - 0.4) + 0.4;
 
 		const geometry = new BoxGeometry(boxSize, boxSize, boxSize);
 
@@ -45,11 +48,7 @@ const main = () => {
 		return cube;
 	};
 
-	const cubes: Mesh[] = [
-		addCube(0, "./src/images/elena.png"),
-		addCube(-2, "./src/images/elena2.png"),
-		addCube(2, "./src/images/elena3.png"),
-	];
+	const cubes: Mesh[] = [addCube(0, elena1), addCube(-2, elena2), addCube(2, elena3)];
 
 	const color = 0xffffff;
 	const intensity = 1;
