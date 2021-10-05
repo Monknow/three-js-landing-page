@@ -7,7 +7,159 @@
 		<title>Vite App</title>
 	</head>
 	<body>
-		<canvas id="canvas"> </canvas>
-		<script type="module" src="/src/main.ts"></script>
+		<div class="loading-container">
+			<div class="loading">
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+			</div>
+		</div>
+		<div class="loaded-content">
+			<nav>
+				<img src="./src/images/logo.png" alt="logo" />
+				<div class="menu">
+					<a href="#join" class="secondary-button">Join</a>
+					<details>
+						<summary >
+							<div class="menu-line"></div>
+							<div class="menu-line"></div>
+							<div class="menu-line"></div>
+						</summary>
+						<div class="links">
+							<a href="#about">About</a>
+							<a href="#FAQ">FAQ</a>
+							<a href="#contact">Contact</a>
+						</div>
+					</details>
+				</div>
+			</nav>
+			<iframe src="./main-banner.html" class="main-banner" importance="high"></iframe>
+			<div id="common-content">
+				<div class="wave-transition"></div>
+				<main>
+					<section id="join">
+						<iframe class="rotating-moon" src="./rotating-moon.html" importance="low"></iframe>
+
+						<div class="text">
+							<h1>Join</h1>
+							<p>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio totam ratione porro
+								corporis, dignissimos
+							</p>
+							<button class="primary-button">Join</button>
+						</div>
+					</section>
+					<div class="wave-transition inverse"></div>
+
+					<section id="about">
+						<iframe class="several-moons" src="./several-moons.html" importance="low"></iframe>
+						<div class="text">
+							<h1>About</h1>
+							<p>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio totam ratione porro
+								corporis, dignissimos nostrum aut nam ad voluptates hic esse iure labore ab assumenda
+								tempora soluta, voluptatum officia? Aliquam eveniet quaerat assumenda eius quam facere
+								temporibus ipsa consectetur expedita praesentium porro quidem impedit esse, nemo
+								veritatis distinctio odit incidunt similique. Minima, assumenda sunt aliquam saepe
+								pariatur aperiam cupiditate dignissimos.
+							</p>
+						</div>
+					</section>
+					<div class="wave-transition"></div>
+
+					<section id="FAQ">
+						<iframe class="rotating-moon" src="./rotating-moon.html" importance="low"></iframe>
+						<div class="text">
+							<h1>FAQ</h1>
+							<ul>
+								<li>
+									<details>
+										<summary>
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, incidunt?
+										</summary>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut dicta dolorem
+										distinctio accusantium rerum veritatis beatae. Nemo, recusandae!
+									</details>
+								</li>
+								<li>
+									<details>
+										<summary>
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, incidunt?
+										</summary>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut dicta dolorem
+										distinctio accusantium rerum veritatis beatae. Nemo, recusandae!
+									</details>
+								</li>
+								<li>
+									<details>
+										<summary>
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, incidunt?
+										</summary>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut dicta dolorem
+										distinctio accusantium rerum veritatis beatae. Nemo, recusandae!
+									</details>
+								</li>
+								<li>
+									<details>
+										<summary>
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, incidunt?
+										</summary>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut dicta dolorem
+										distinctio accusantium rerum veritatis beatae. Nemo, recusandae!
+									</details>
+								</li>
+								<li>
+									<details>
+										<summary>
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, incidunt?
+										</summary>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ut dicta dolorem
+										distinctio accusantium rerum veritatis beatae. Nemo, recusandae!
+									</details>
+								</li>
+							</ul>
+						</div>
+					</section>
+					<div class="wave-transition inverse"></div>
+
+					<section id="contact-me">
+						<iframe class="several-moons" src="./several-moons.html" importance="low"></iframe>
+
+						<form action="https://formsubmit.io/send/8b76bd5b-4abf-4a18-b52c-df8caeda0157" method="POST">
+							<h1>Contact us</h1>
+							<input name="_redirect" type="hidden" id="name" />
+							<input type="hidden" name="_url" value="https://monknow.dev" />
+							<div class="short-fields">
+								<p>
+									<label for="campos-cortos__nombre--label">Name</label>
+									<input type="text" name="name" id="campos-cortos__nombre--input" />
+								</p>
+								<p>
+									<label for="campos-cortos__correo--label">Email</label>
+									<input type="email" name="email" id="campos-cortos__correo--input" />
+								</p>
+							</div>
+							<p class="contact-me__message">
+								<label for="formulario__mensaje--label">Message</label>
+								<textarea
+									name="mensaje"
+									id="formulario__mensaje--textarea"
+									cols="10"
+									rows="5"
+								></textarea>
+							</p>
+							<input type="text" name="_honey" class="honeypot" />
+							<button class="secondary-button" type="submit" aria-label="Enviar mensaje">Submit</button>
+						</form>
+					</section>
+				</main>
+				<div class="wave-transition"></div>
+				<footer></footer>
+			</div>
+		</div>
+		<script async src="./src/ts/preload.ts"></script>
+		<script type="module" src="./src/ts/main.ts"></script>
 	</body>
 </html>

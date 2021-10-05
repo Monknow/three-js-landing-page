@@ -1,0 +1,42 @@
+#FAQ {
+	align-content: flex-start;
+
+	.text {
+		width: clamp(100px, 90vw, 600px);
+	}
+
+	ul {
+		display: flex;
+		align-content: flex-start;
+		flex-flow: column nowrap;
+		gap: 30px;
+
+		list-style: none;
+
+		text-align: justify;
+	}
+
+	details {
+		transition: height 200ms ease;
+		overflow: hidden;
+
+		&:not([open]) {
+			height: 1.25em;
+		}
+
+		&[open] {
+			margin-bottom: 0px;
+
+			height: calc(220px - clamp(50px, 10vw, 100px));
+
+			summary {
+				font-family: "noto serif bold", sans-serif;
+				font-weight: 500;
+			}
+		}
+	}
+
+	summary {
+		margin-bottom: 10px;
+	}
+}

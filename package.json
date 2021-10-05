@@ -2,17 +2,18 @@
 	"name": "landing-page-three.js",
 	"version": "0.0.0",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --host",
 		"build": "tsc && vite build",
 		"serve": "vite preview"
 	},
 	"devDependencies": {
+		"@types/three": "^0.132.2",
 		"sass": "^1.42.1",
 		"typescript": "^4.3.2",
 		"vite": "^2.5.4"
 	},
 	"dependencies": {
-		"@types/three": "^0.132.1",
+		"cannon-es": "^0.18.0",
 		"three": "^0.132.2"
 	}
 }

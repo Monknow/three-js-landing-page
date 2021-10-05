@@ -1,15 +1,423 @@
+@use "./components/faq";
+@use "./components/contact";
+
+$mobile-width-breakpoint: 700px;
+$margin-rotating-moon: calc(clamp(50px, 30vw, 250px) * -1);
+
+@function pick-wave() {
+	$index: random(4);
+	$result: "";
+
+	@if $index == 1 {
+		$result: 'url("../svg/layered-waves-haikei-1.svg")';
+	}
+	@if $index == 2 {
+		$result: 'url("../svg/layered-waves-haikei-2.svg")';
+	}
+	@if $index == 3 {
+		$result: 'url("../svg/layered-waves-haikei-3.svg")';
+	}
+	@if $index == 4 {
+		$result: 'url("../svg/layered-waves-haikei-4.svg")';
+	}
+
+	@return unquote($result);
+}
+
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scrollbar-color: #fffa #0000;
+
+	font-family: "noto serif regular", sans-serif;
+	font-size: clamp(10px, 3vw, 16px);
 }
 
 body {
+	overflow-x: hidden;
 	height: 100vh;
+
+	background-color: #000;
 }
 
-#canvas {
-	display: block;
+@keyframes slidein {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loading-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: 100vh;
+	width: 100vw;
+
+	.loading {
+		$colors: #7ef9ff, #89cff0, #4682b4, #0f52ba, #000080;
+		display: flex;
+
+		.dot {
+			position: relative;
+			width: 2em;
+			height: 2em;
+			margin: 0.8em;
+			border-radius: 50%;
+			background-color: #fff;
+
+			&::before {
+				position: absolute;
+				content: "";
+				width: 100%;
+				height: 100%;
+				background: inherit;
+				border-radius: inherit;
+				animation: wave 2s ease-out infinite;
+			}
+
+			@for $i from 1 through 5 {
+				&:nth-child(#{$i}) {
+					&::before {
+						animation-delay: $i * 0.2s;
+					}
+				}
+			}
+		}
+	}
+}
+
+@keyframes wave {
+	50%,
+	75% {
+		transform: scale(2.5);
+	}
+
+	80%,
+	100% {
+		opacity: 0;
+	}
+}
+
+nav {
+	position: absolute;
+
+	z-index: 2;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	box-sizing: border-box;
+	padding: 10px clamp(5px, 8vw, 30px);
 
 	width: 100%;
-	height: 100%;
+	height: clamp(60px, 20vw, 80px);
+
+	background-color: transparent;
+
+	img {
+		height: 100%;
+	}
+
+	a {
+		border-bottom: 2px transparent;
+
+		font-size: 16px;
+		text-decoration: none;
+
+		color: #fff;
+
+		background-image: linear-gradient(0deg, #ffffff, #ffffff);
+		background-repeat: no-repeat;
+		background-size: 0 2px;
+		background-position: center bottom;
+
+		transition: all 100ms linear;
+		transition-property: background-size, background-position;
+
+		&:hover {
+			background-size: 100% 2px;
+		}
+	}
+}
+
+.menu {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	gap: 0px clamp(10px, 10vw, 20px);
+
+	details {
+		height: 30px;
+
+		&[open] {
+			summary {
+				height: 100%;
+
+				cursor: pointer;
+			}
+
+			.menu-line {
+				width: 37px;
+
+				&:nth-child(1) {
+					transform: rotate(45deg) translate(7px, 7px);
+				}
+				&:nth-child(2) {
+					transform: rotate(-45deg);
+				}
+				&:nth-child(3) {
+					transform: scale(0);
+				}
+			}
+		}
+	}
+
+	summary {
+		display: flex;
+		flex-flow: column nowrap;
+		gap: 5px;
+
+		height: 100%;
+
+		cursor: pointer;
+	}
+
+	.menu-line {
+		height: 5px;
+		width: 30px;
+
+		background-color: #fff;
+
+		transition: all 100ms ease-in-out;
+	}
+
+	.links {
+		position: absolute;
+		top: 60px;
+		right: 30px;
+
+		display: flex;
+		align-items: flex-end;
+		justify-self: center;
+		flex-flow: column nowrap;
+		gap: clamp(2px, 5vw, 10px) 0px;
+
+		text-align: right;
+	}
+}
+
+.primary-button {
+	border: 1px solid #000;
+	border-radius: 2px;
+
+	padding: 5px 20px;
+
+	font-size: 2rem;
+
+	background-color: #fff;
+
+	transition: all 300ms;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #000;
+		color: #fff;
+	}
+}
+
+.secondary-button {
+	border: 1px solid #fff;
+	border-radius: 2px;
+
+	padding: 5px 20px;
+
+	transition: all 300ms;
+	cursor: pointer;
+
+	background-color: transparent;
+	color: #fff;
+
+	&:hover {
+		background-color: #fff;
+		color: #000;
+	}
+}
+
+h1 {
+	font-size: 4rem;
+	font-family: "noto serif bold", sans-serif;
+	font-weight: 600;
+	text-align: center;
+}
+
+.main-banner {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	border: none;
+
+	width: 100vw;
+	min-height: 120vh;
+
+	@media (hover: none) and (pointer: coarse) {
+		& {
+			pointer-events: none;
+		}
+	}
+}
+
+#common-content {
+	position: absolute;
+	top: 100vh;
+	left: 0;
+
+	width: 100%;
+}
+
+.wave-transition {
+	position: relative;
+	z-index: 3;
+
+	width: 100%;
+	aspect-ratio: 900/200;
+
+	background-image: pick-wave();
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.inverse {
+	position: relative;
+	z-index: 3;
+
+	overflow: hidden;
+	transform: rotate(180deg);
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 200%;
+		height: 200%;
+		top: -50%;
+		left: -50%;
+		z-index: -1;
+		transform: rotate(-180deg);
+	}
+}
+
+main {
+	box-sizing: border-box;
+
+	width: 100%;
+}
+
+section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: clamp(10px, 20vw, 50px);
+
+	padding: 40px 0px;
+
+	.text {
+		flex-shrink: 2;
+		padding: 20px clamp(10px, 20vw, 30px);
+	}
+
+	@media (hover: none) and (pointer: coarse) {
+		iframe {
+			pointer-events: none;
+		}
+	}
+
+	&:nth-of-type(3n) {
+		flex-flow: row-reverse;
+
+		.rotating-moon {
+			margin-right: $margin-rotating-moon;
+		}
+	}
+
+	&:nth-of-type(1n) {
+		color: #000;
+		background-color: #fff;
+
+		min-height: 100vh;
+
+		.rotating-moon {
+			position: relative;
+			margin-left: $margin-rotating-moon;
+			border: none;
+			border-radius: 50%;
+
+			height: clamp(100px, 50vw, 100vh);
+			aspect-ratio: 1/1;
+
+			background-color: #000;
+		}
+
+		.text {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-flow: column nowrap;
+			gap: clamp(10px, 8vw, 20px);
+		}
+	}
+
+	&:nth-of-type(2n) {
+		background: transparent;
+
+		color: #fff;
+
+		.several-moons {
+			position: absolute;
+			border: none;
+
+			height: calc(100vh + 30vw);
+			width: 100%;
+
+			background-color: #000;
+		}
+
+		.text {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-flow: column nowrap;
+			gap: clamp(10px, 8vw, 20px);
+		}
+	}
+
+	@media screen and (max-width: $mobile-width-breakpoint) {
+		&:nth-of-type(n) {
+			flex-flow: column nowrap;
+			justify-content: center;
+
+			text-align: center;
+
+			.rotating-moon {
+				margin: 0;
+			}
+		}
+	}
 }
