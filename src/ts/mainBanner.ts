@@ -332,7 +332,7 @@ const main = () => {
 
 		window.addEventListener("mouseup", () => {
 			if (joinLetterWasClicked) {
-				window.parent.postMessage("join", "http://localhost:3000/");
+				window.parent.postMessage("join", window.location.origin);
 				joinLetterWasClicked = false;
 			}
 			isDragging = false;

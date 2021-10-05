@@ -6,7 +6,7 @@ window.addEventListener(
 	"message",
 	(event) => {
 		// Do we trust the sender of this message?
-		if (event.origin !== "http://localhost:3000") {
+		if (event.origin !== window.location.origin) {
 			return;
 		}
 		if (event && event.data === "join") {
